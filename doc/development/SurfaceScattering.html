@@ -1,0 +1,1730 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for RAY-UI, ray tracing for synchrotron beamlines">
+      
+      
+      
+        <link rel="canonical" href="https://hz-b.github.io/ray-installers/doc/development/SurfaceScattering.html">
+      
+      
+        <link rel="prev" href="LooperPresetFormat.html">
+      
+      
+        <link rel="next" href="FieldPropagationInUrad.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Surface errors and edge diffraction - RAY-UI Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#surface-errors-and-aperture-diffraction-of-mirrors" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="RAY-UI Documentation" class="md-header__button md-logo" aria-label="RAY-UI Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RAY-UI Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Surface errors and edge diffraction
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/hz-b/ray-installers" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="RAY-UI Documentation" class="md-nav__button md-logo" aria-label="RAY-UI Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    RAY-UI Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/hz-b/ray-installers" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="LooperPresetFormat.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Looper preset format
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Surface errors and edge diffraction
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="SurfaceScattering.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Surface errors and edge diffraction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-where-the-geometric-model-goes-wrong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Where the geometric model goes wrong
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-scattering-from-a-surface-with-height-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Scattering from a surface with height errors
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Scattering from a surface with height errors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-the-surface-as-a-phase-screen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 The surface as a phase screen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-the-expansion-that-becomes-a-monte-carlo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 The expansion that becomes a Monte Carlo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-direction-change-at-grazing-incidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Direction change at grazing incidence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-gratings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Gratings
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-the-table-of-a-mirror" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 The table of a mirror
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-each-reflected-ray" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Each reflected ray
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-edge-diffraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Edge diffraction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Edge diffraction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-what-is-implemented" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 What is implemented
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-when-it-is-right-and-when-not" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 When it is right, and when not
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-why-not-a-deflection-that-depends-on-the-distance-to-the-edge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Why not a deflection that depends on the distance to the edge
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-how-to-use-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. How to use it
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. How to use it">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-in-the-parameter-panel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 In the parameter panel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-in-an-rml-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 In an RML file
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-reading-the-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Reading the result
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Validation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-the-statistics-of-the-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 The statistics of the implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-against-srw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Against SRW
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-gratings-in-a-trace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Gratings in a trace
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-assumptions-and-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Assumptions and limits
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="FieldPropagationInUrad.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Field propagation in urad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-where-the-geometric-model-goes-wrong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Where the geometric model goes wrong
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-scattering-from-a-surface-with-height-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Scattering from a surface with height errors
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Scattering from a surface with height errors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-the-surface-as-a-phase-screen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 The surface as a phase screen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-the-expansion-that-becomes-a-monte-carlo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 The expansion that becomes a Monte Carlo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-direction-change-at-grazing-incidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Direction change at grazing incidence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-gratings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Gratings
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-the-table-of-a-mirror" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 The table of a mirror
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-each-reflected-ray" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Each reflected ray
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-edge-diffraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Edge diffraction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Edge diffraction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-what-is-implemented" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 What is implemented
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-when-it-is-right-and-when-not" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 When it is right, and when not
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-why-not-a-deflection-that-depends-on-the-distance-to-the-edge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Why not a deflection that depends on the distance to the edge
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-how-to-use-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. How to use it
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. How to use it">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-in-the-parameter-panel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 In the parameter panel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-in-an-rml-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 In an RML file
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-reading-the-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Reading the result
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Validation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-the-statistics-of-the-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 The statistics of the implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-against-srw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Against SRW
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-gratings-in-a-trace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Gratings in a trace
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-assumptions-and-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Assumptions and limits
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="surface-errors-and-aperture-diffraction-of-mirrors">Surface errors and aperture diffraction of mirrors<a class="headerlink" href="#surface-errors-and-aperture-diffraction-of-mirrors" title="Permanent link">&para;</a></h1>
+<p>A ray tracer sees a mirror's height errors only through the tilt they give the
+local normal, and nothing diffracts at a mirror's edges. For X-ray mirrors of
+good quality both simplifications can be wrong by large factors, in opposite
+directions and at opposite ends of the photon-energy range. This note describes
+two per-mirror settings that replace them with a wave-optically correct
+treatment: the physics, the implementation, how to use them, and what they do
+not cover.</p>
+<table>
+<thead>
+<tr>
+<th>setting (RML id)</th>
+<th>values</th>
+<th>what it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Profile Treatment</strong> (<code>surfaceErrorTreatment</code>)</td>
+<td><code>geometric (local slope)</code> (0, default) · <code>wave-optical (PSD scattering)</code> (1)</td>
+<td>how a surface profile file acts on the rays</td>
+</tr>
+<tr>
+<td><strong>Edge Diffraction (Fraunhofer)</strong> (<code>edgeDiffraction</code>)</td>
+<td><code>off</code> (0, default) · <code>on</code> (1)</td>
+<td>Fraunhofer diffraction at the mirror aperture</td>
+</tr>
+</tbody>
+</table>
+<p>Both settings exist for the plane mirror, cylinder, cone, sphere, toroid,
+ellipsoid, hyperboloid, paraboloid, elliptical toroid and the experts optics,
+and for the plane, spherical and toroidal gratings (section 2.4). Crystals,
+capillaries and the reflection zone plate keep the geometric treatment. A file
+without the settings traces exactly as before.</p>
+<h2 id="1-where-the-geometric-model-goes-wrong">1. Where the geometric model goes wrong<a class="headerlink" href="#1-where-the-geometric-model-goes-wrong" title="Permanent link">&para;</a></h2>
+<p>The QMAP beamline at BESSY III was simulated in RAY-UI and, independently, with
+the wave-optics code SRW, with ideal mirrors up to the exit slit and the same
+measured-like surface profiles on the two focusing mirrors M5 and M6
+(horizontal and vertical FWHM, 0.07 % photon band in both codes):</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align: right;">400 eV RAY-UI</th>
+<th style="text-align: right;">400 eV SRW</th>
+<th style="text-align: right;">1000 eV RAY-UI</th>
+<th style="text-align: right;">1000 eV SRW</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exit slit, vertical</td>
+<td style="text-align: right;">15.00 µm</td>
+<td style="text-align: right;">15.10 µm</td>
+<td style="text-align: right;">15.00 µm</td>
+<td style="text-align: right;">15.09 µm</td>
+</tr>
+<tr>
+<td>focus, horizontal</td>
+<td style="text-align: right;">142.3 nm</td>
+<td style="text-align: right;">59.7 nm</td>
+<td style="text-align: right;">161.8 nm</td>
+<td style="text-align: right;">42.0 nm</td>
+</tr>
+<tr>
+<td>focus, vertical</td>
+<td style="text-align: right;">94.3 nm</td>
+<td style="text-align: right;">86.7 nm</td>
+<td style="text-align: right;">104.9 nm</td>
+<td style="text-align: right;">94.8 nm</td>
+</tr>
+</tbody>
+</table>
+<p>Up to the exit slit, where no mirror carries a profile, the codes agree. The
+horizontal focus differs by a factor of 2.4 to 3.9, and the difference is
+generated at M5 and M6. The geometric width hardly depends on the photon
+energy; the wave-optical one falls with the wavelength.</p>
+<p>The reason is the size of the phase error. A height error <code>h</code> imprints on a beam
+reflected at grazing angle <code>theta</code> the phase</p>
+<div class="highlight"><pre><span></span><code>phi = 2 k h sin(theta) = 4 pi h sin(theta) / lambda
+sigma_phi = 4 pi sigma_h sin(theta) / lambda          (rms)
+</code></pre></div>
+<p>The M6 profile has <code>sigma_h</code> = 0.25 nm at <code>theta</code> = 4°, which gives
+<code>sigma_phi</code> = 0.07 rad at 400 eV and 0.18 rad at 1000 eV. A wavefront with
+0.1 rad of phase error is almost perfect: its Strehl ratio <code>exp(-sigma_phi^2)</code>
+is 0.99 to 0.97, the focus keeps its diffraction-limited core, and a few percent
+of the power go into a faint, wide halo. Geometric optics instead deflects every
+ray by twice the local slope, however small the height behind that slope, and
+turns the same surface into a blur of the full slope width. That is the limit
+<code>sigma_phi &gt;&gt; 1</code>, and it does not apply here.</p>
+<p>At low energy the opposite happens. M6 is overfilled up to about 200 eV, its
+200 mm length limits the numerical aperture, and the focus is the Fraunhofer
+pattern of the mirror aperture. A ray tracer has no diffraction at a mirror
+edge and returns a focus below the diffraction limit (at 50 eV RAY-UI gives
+160 nm where the diffraction limit of M6 alone is about 270 nm).</p>
+<h2 id="2-scattering-from-a-surface-with-height-errors">2. Scattering from a surface with height errors<a class="headerlink" href="#2-scattering-from-a-surface-with-height-errors" title="Permanent link">&para;</a></h2>
+<h3 id="21-the-surface-as-a-phase-screen">2.1 The surface as a phase screen<a class="headerlink" href="#21-the-surface-as-a-phase-screen" title="Permanent link">&para;</a></h3>
+<p>In the Kirchhoff (tangent-plane) approximation the reflected field is the
+incident one times <code>exp(i phi(x, z))</code>. For a surface whose heights are a
+stationary Gaussian random process with autocovariance <code>C(tau) = &lt;h(r) h(r + tau)&gt;</code>
+and variance <code>sigma_h^2 = C(0)</code>, the angular distribution of the reflected
+intensity is the Fourier transform, over the separation <code>tau</code>, of the surface
+transfer function</p>
+<div class="highlight"><pre><span></span><code>H(tau) = &lt; exp(i [phi(r + tau) - phi(r)]) &gt; = exp( -sigma_phi^2 [1 - C(tau) / sigma_h^2] )
+</code></pre></div>
+<p>This is the Beckmann–Kirchhoff result [1], in the form Harvey and co-workers use
+for optical surfaces [2, 3] and Sinha et al. derive for X-rays at grazing
+incidence [4]. Spatial frequency <code>f</code> on the surface corresponds to a change of
+direction by the grating equation (section 2.3).</p>
+<h3 id="22-the-expansion-that-becomes-a-monte-carlo">2.2 The expansion that becomes a Monte Carlo<a class="headerlink" href="#22-the-expansion-that-becomes-a-monte-carlo" title="Permanent link">&para;</a></h3>
+<p>Expanding the exponential,</p>
+<div class="highlight"><pre><span></span><code>H(tau) = exp(-sigma_phi^2) * sum_{n &gt;= 0} (sigma_phi^2)^n / n! * [C(tau) / sigma_h^2]^n
+</code></pre></div>
+<p>The Fourier transform of <code>C(tau) / sigma_h^2</code> is the power spectral density
+normalised to unit integral, <code>p(f) = PSD(f) / sigma_h^2</code>, which is a probability
+density; the transform of its n-th power is the n-fold convolution of <code>p</code> with
+itself. The reflected intensity is therefore a Poisson mixture: with probability</p>
+<div class="highlight"><pre><span></span><code>P(n) = exp(-sigma_phi^2) (sigma_phi^2)^n / n!
+</code></pre></div>
+<p>the ray carries the sum of <code>n</code> spatial frequencies drawn independently from
+<code>p(f)</code>. This is the algorithm RAY-UI uses, ray by ray. It contains the familiar
+limits:</p>
+<ul>
+<li><code>n = 0</code>, weight <code>S = exp(-sigma_phi^2)</code>: the specular core, reduced by the
+  Debye–Waller or Strehl factor. <code>1 - S</code> is the total integrated scatter of
+  Bennett and Porteus [5].</li>
+<li><code>sigma_phi &lt;&lt; 1</code>: after the core, <code>n = 1</code> dominates, and the halo has the shape
+  of the PSD. This is first-order (Rayleigh–Rice) scattering [6, 7].</li>
+<li><code>sigma_phi &gt;&gt; 1</code>: the sum of many frequencies is Gaussian, with covariance
+  <code>sigma_phi^2 &lt;f f&gt;</code>. Section 2.3 shows that this is exactly the geometric
+  deflection by twice the slope.</li>
+</ul>
+<p>The variance of the direction change is <code>sigma_phi^2 &lt;f^2&gt; lambda^2</code> for every
+<code>sigma_phi</code>: the rms deflection is always twice the rms slope. What changes with
+<code>sigma_phi</code> is the shape. A small phase error keeps most rays undeflected and
+sends a few far out; a large one deflects all rays a little. The rms width of a
+focus therefore hardly changes between the two treatments, while its FWHM and
+its encircled energy can change by a large factor.</p>
+<h3 id="23-direction-change-at-grazing-incidence">2.3 Direction change at grazing incidence<a class="headerlink" href="#23-direction-change-at-grazing-incidence" title="Permanent link">&para;</a></h3>
+<p>A spatial frequency <code>(f_x, f_z)</code> of the surface, <code>z</code> along the mirror and <code>x</code>
+across it, adds <code>lambda (f_x, f_z)</code> to the tangential components of the ray's unit
+direction vector. That is the grating equation of that Fourier component:</p>
+<div class="highlight"><pre><span></span><code>cos(beta') = cos(beta) + lambda f_z      -&gt; delta_beta = -lambda f_z / sin(theta)   (in the plane of incidence)
+sin(alpha') = lambda f_x                 -&gt; delta_alpha = lambda f_x                (across it)
+</code></pre></div>
+<p>In the plane of incidence the change is amplified by <code>1 / sin(theta)</code>; across
+it, it is not. In the limit <code>sigma_phi &gt;&gt; 1</code> the rms tangential change is</p>
+<div class="highlight"><pre><span></span><code>lambda sigma_phi sqrt(&lt;f_z^2&gt;) = 4 pi sigma_h sin(theta) sqrt(&lt;f_z^2&gt;) = 2 sin(theta) m_z
+</code></pre></div>
+<p>with <code>m_z = 2 pi sigma_h sqrt(&lt;f_z^2&gt;)</code> the rms meridional slope. In the plane
+of incidence that is a deflection of <code>2 m_z</code>, and across it <code>2 sin(theta) m_x</code>:
+exactly the geometric rules, including the well-known suppression of sagittal
+slope errors at grazing incidence.</p>
+<h3 id="24-gratings">2.4 Gratings<a class="headerlink" href="#24-gratings" title="Permanent link">&para;</a></h3>
+<p>A height error <code>h</code> of a grating moves its grooves along the normal. The incoming
+wave and the diffracted order then travel <code>h sin(alpha)</code> and <code>h sin(beta)</code>
+further, with <code>alpha</code> and <code>beta</code> their grazing angles, so</p>
+<div class="highlight"><pre><span></span><code>phi = k h (sin(alpha) + sin(beta)),   sigma_phi = 2 pi sigma_h (sin(alpha) + sin(beta)) / lambda
+</code></pre></div>
+<p>For a mirror, <code>alpha = beta</code>, and this is the formula of section 1. The rest is
+unchanged. A spatial frequency <code>f</code> of the surface adds <code>lambda f</code> to the
+tangential direction of the diffracted ray: the grating equation of that
+Fourier component, on top of that of the grooves. The table, the Poisson
+expansion and its limits are those of sections 2.1 to 2.3; only <code>mu</code> takes
+both angles. A ray sent into the zeroth order has <code>alpha = beta</code> and gets the
+mirror formula.</p>
+<p>Edge diffraction on a grating is diffraction at the aperture the diffracted
+order sees, <code>L sin(beta)</code> in the dispersion plane. Through the dispersion it is
+the resolving power of the grating. At fixed incidence the grating equation
+<code>cos(alpha) - cos(beta) = m N lambda</code> gives <code>sin(beta) d(beta) = m N d(lambda)</code>,
+with <code>m</code> the order and <code>N</code> the line density. The first zero of the Fraunhofer
+pattern, <code>d(beta) = lambda / (L sin(beta))</code>, is therefore
+<code>d(lambda) = lambda / (m N L)</code>. That is Rayleigh's <code>lambda / d(lambda) = m N L</code>,
+the order times the number of illuminated grooves [12]. A ray tracer without it
+resolves as finely as the source size and the slope errors allow. As on a
+mirror, the setting belongs on a grating that the beam overfills; an
+underfilled grating's resolution is already in the divergence of the rays.</p>
+<h2 id="3-implementation">3. Implementation<a class="headerlink" href="#3-implementation" title="Permanent link">&para;</a></h2>
+<p>The code is <code>src/raycore/surface_scattering.f90</code>. RAY.FOR calls it at four places.</p>
+<h3 id="31-the-table-of-a-mirror">3.1 The table of a mirror<a class="headerlink" href="#31-the-table-of-a-mirror" title="Permanent link">&para;</a></h3>
+<p>When <code>SURF</code> has read a profile file for a mirror whose slope errors are on and
+whose Profile Treatment is wave-optical, <code>SURFSCAT_SETUP</code> builds a table:</p>
+<ol>
+<li>It removes piston and the best-fit plane; they belong to the alignment, not
+   to the surface error.</li>
+<li><code>sigma_h</code> is the rms of the residual.</li>
+<li>It applies a Welch window along both axes and zero-pads to the next power of
+   two at least twice the profile size. Without the window, the edge
+   discontinuity of a non-periodic measured map would leak into the high
+   frequencies and appear as a spurious halo.</li>
+<li>The periodogram <code>|FFT|^2</code> without its DC term, normalised to one, becomes a
+   cumulative table over the frequency grid, together with the second moments
+   <code>&lt;f_z^2&gt;</code> and <code>&lt;f_x^2&gt;</code>.</li>
+</ol>
+<h3 id="32-each-reflected-ray">3.2 Each reflected ray<a class="headerlink" href="#32-each-reflected-ray" title="Permanent link">&para;</a></h3>
+<p>After <code>REFLEX</code>, <code>SURFSCAT_APPLY</code> computes, from the photon energy and the local
+grazing angle, <code>mu = sigma_phi^2</code>.</p>
+<ul>
+<li>For <code>mu &lt;= 50</code> it draws <code>n</code> from a Poisson distribution with mean <code>mu</code>. It
+  then adds <code>n</code> frequencies from the table, each placed uniformly within its
+  frequency bin.</li>
+<li>For <code>mu &gt; 50</code> it draws the sum directly from the Gaussian with variance
+  <code>mu &lt;f^2&gt;</code> per axis.</li>
+</ul>
+<p>It adds <code>lambda f</code> to the tangential part of the direction and restores the unit
+length along the normal. A frequency that would make the ray evanescent leaves
+it specular; at grazing incidence that needs spatial periods shorter than the
+wavelength and does not occur for measured maps.</p>
+<p><code>PLANES</code> does not tilt the normal for such a profile, so the slope of the
+profile is not counted twice. The rms slope error (<code>slopeErrorSag</code>,
+<code>slopeErrorMer</code>) keeps the geometric treatment: an rms slope does not fix the
+heights, and the heights are what sets <code>sigma_phi</code>.</p>
+<p>The grating routines <code>PLGRAT</code>, <code>SPGRAT</code> and <code>TOGRAT</code> call
+<code>SURFSCAT_APPLY_GRATING</code> after <code>REFRAC</code>, with the sine of the incoming grazing
+angle taken before the diffraction. It uses the mean of the two sines in <code>mu</code>.
+<code>SURFSCAT_APPLY</code> is its mirror form, both angles equal.</p>
+<p>The settings are <code>MPARAM(IM,86)</code> (Profile Treatment) and <code>MPARAM(IM,87)</code> (Edge
+Diffraction).</p>
+<h2 id="4-edge-diffraction">4. Edge diffraction<a class="headerlink" href="#4-edge-diffraction" title="Permanent link">&para;</a></h2>
+<h3 id="41-what-is-implemented">4.1 What is implemented<a class="headerlink" href="#41-what-is-implemented" title="Permanent link">&para;</a></h3>
+<p>With Edge Diffraction on, every reflected ray receives a Fraunhofer deflection
+for the aperture the reflected beam sees. In the plane of incidence that is a
+slit of width <code>L sin(theta)</code>, with <code>L</code> the mirror length and <code>theta</code> the local
+grazing angle; across it, a slit of the mirror width <code>W</code>. The deflection is
+drawn from <code>sinc^2</code> by the same routine RAY-UI uses at slits
+(<code>FRAUN_DIFFRACTION</code>). On a grating the aperture in the dispersion plane is
+<code>L sin(beta)</code>, with <code>beta</code> the grazing angle of the diffracted order
+(section 2.4).</p>
+<h3 id="42-when-it-is-right-and-when-not">4.2 When it is right, and when not<a class="headerlink" href="#42-when-it-is-right-and-when-not" title="Permanent link">&para;</a></h3>
+<p>For a uniformly illuminated, overfilled aperture the ensemble of deflected rays
+is the Fraunhofer pattern of the aperture. Convolved with the geometric image,
+it is the partially coherent image. That is the case in which a ray tracer
+misses the diffraction limit, and in it the setting is exact.</p>
+<p>It has three limits:</p>
+<ul>
+<li><strong>Underfilled mirrors.</strong> The diffraction of a beam's own finite size is
+  already in the rays, through the radiation size and divergence of the source.
+  A mirror that does not clip the beam adds nothing, but the setting still
+  deflects every ray for the full aperture. QMAP M6 is filled to 175 of its
+  200 mm at 400 eV and to 117 mm at 1000 eV. There the setting broadens the
+  horizontal focus, in FWHM / EE80, by 22 / 38 % and 10 / 17 %, while SRW
+  agrees with the trace without it at 1000 eV (section 6.2). Switch the setting
+  on only for mirrors that clip the beam.</li>
+<li><strong>Mirrors as long as their image distance.</strong> Each ray is deflected where it
+  leaves the mirror and then travels its own distance to the image; for M6,
+  with <code>L</code> = <code>q</code> = 200 mm, between 100 and 300 mm. The pattern at the image is
+  therefore a mixture of <code>sinc^2</code> patterns scaled by these distances. The
+  traced rms broadening in the plane of incidence matches that of a single
+  <code>sinc^2</code> at 200 mm within 6 % at 50 to 200 eV. The enclosed energies come
+  out right, EE80 and EE90 within 2 and 5 % of SRW at 50 eV. The rays from the near end, however,
+  sharpen the peak, and the FWHM of the focus is too small, by 28 % at 50 eV.
+  A mixture computed from the <code>sinc^2</code> alone reproduces this: FWHM 262 nm
+  instead of 315 nm for a single distance of 200 mm, but EE90 571 instead of
+  509 nm. For the usual <code>L &lt;&lt; q</code> all rays travel nearly the same distance and
+  the effect vanishes.</li>
+<li><strong>Mirrors strongly curved across the beam.</strong> The deflection is applied in the
+  local plane of incidence. Where the beam overfills a mirror whose sagittal
+  radius is comparable to its width, that plane tilts across the mirror and part
+  of the in-plane deflection appears across it. M6 has sagittal radii of 18 to
+  30 mm on a 50 mm width. At 50 eV its vertical focus broadens by 151 nm rms,
+  where the 50 mm width alone gives 71 nm. The excess shrinks with the sagittal
+  footprint and is gone at 400 eV.</li>
+</ul>
+<h3 id="43-why-not-a-deflection-that-depends-on-the-distance-to-the-edge">4.3 Why not a deflection that depends on the distance to the edge<a class="headerlink" href="#43-why-not-a-deflection-that-depends-on-the-distance-to-the-edge" title="Permanent link">&para;</a></h3>
+<p>Monte Carlo codes sometimes deflect a ray according to its distance <code>d</code> from the
+nearest edge, by a Gaussian of width about <code>lambda / (4 pi d)</code>. This is the
+"Heisenberg uncertainty principle" method of Freniere, Gregory and Hassler [8].
+It would leave underfilled mirrors alone. For a uniformly illuminated slit,
+however, it cannot give the Fraunhofer pattern. Once its FWHM is matched, 80 %
+and 90 % of the power lie within 1.7 and 3.0 <code>lambda / D</code> instead of 1.03 and
+1.46.</p>
+<p>The reason is that the exact ray description of an aperture, its Wigner
+function [9], is <code>sin(2 k theta d) / (pi theta)</code>. That has the <code>lambda / d</code>
+width of the uncertainty argument, but it takes negative values. Averaged over
+the aperture it gives <code>sinc^2</code> exactly. No positive kernel can do the same,
+because the zeros of <code>sinc^2</code> are interference. A position-independent
+Fraunhofer deflection is exact where edge diffraction matters, which is why it
+is used here. The complete treatment propagates a wavefront through the
+element, as the HYBRID method of SHADOW does [10].</p>
+<h2 id="5-how-to-use-it">5. How to use it<a class="headerlink" href="#5-how-to-use-it" title="Permanent link">&para;</a></h2>
+<h3 id="51-in-the-parameter-panel">5.1 In the parameter panel<a class="headerlink" href="#51-in-the-parameter-panel" title="Permanent link">&para;</a></h3>
+<p>For a mirror or grating with a measured or modelled profile:</p>
+<ol>
+<li><strong>Slope Error</strong>: <code>Yes</code>.</li>
+<li><strong>Surface Profile</strong>: <code>Profile-File</code>, and <strong>Filepath</strong> to the profile.</li>
+<li><strong>Profile Treatment</strong>: <code>wave-optical (PSD scattering)</code>.</li>
+<li><strong>Edge Diffraction (Fraunhofer)</strong>: <code>on</code> if the mirror clips the beam,
+   otherwise <code>off</code>.</li>
+</ol>
+<p>Profile Treatment is enabled only for a profile file. The thermal bump and the
+cylindrical bowing are smooth figure shapes and stay geometric. Edge
+Diffraction is independent of the surface-error settings.</p>
+<p>The profile file is the format RAY-UI already reads. The first line holds the
+numbers of points across (x) and along (z) the mirror, then the spacings in mm;
+then, for each x, a line of the z values. Heights are in nm for the <code>S</code> and <code>Z</code>
+kinds and in mm for <code>A</code> (ANSYS). At most 251 x 2048 points are used; the
+mirror size is taken from the profile.</p>
+<h3 id="52-in-an-rml-file">5.2 In an RML file<a class="headerlink" href="#52-in-an-rml-file" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;param</span><span class="w"> </span><span class="na">id=</span><span class="s">"slopeError"</span><span class="w"> </span><span class="na">comment=</span><span class="s">"Yes"</span><span class="w"> </span><span class="na">enabled=</span><span class="s">"T"</span><span class="nt">&gt;</span>0<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;param</span><span class="w"> </span><span class="na">id=</span><span class="s">"profileKind"</span><span class="w"> </span><span class="na">comment=</span><span class="s">"Profile-File"</span><span class="w"> </span><span class="na">enabled=</span><span class="s">"T"</span><span class="nt">&gt;</span>0<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;param</span><span class="w"> </span><span class="na">id=</span><span class="s">"profileFile"</span><span class="w"> </span><span class="na">enabled=</span><span class="s">"T"</span><span class="nt">&gt;</span>/path/to/s_mirror_profile.dat<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;param</span><span class="w"> </span><span class="na">id=</span><span class="s">"surfaceErrorTreatment"</span><span class="w"> </span><span class="na">comment=</span><span class="s">"wave-optical (PSD scattering)"</span><span class="w"> </span><span class="na">enabled=</span><span class="s">"T"</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;param</span><span class="w"> </span><span class="na">id=</span><span class="s">"edgeDiffraction"</span><span class="w"> </span><span class="na">comment=</span><span class="s">"on"</span><span class="w"> </span><span class="na">enabled=</span><span class="s">"T"</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
+</code></pre></div>
+<p>Both ids can be scanned in a Looper preset like any other parameter. That is
+the easiest way to compare the two treatments on one beamline.</p>
+<h3 id="53-reading-the-result">5.3 Reading the result<a class="headerlink" href="#53-reading-the-result" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Use FWHM and encircled energy, not RMS.</strong> The rms width barely changes
+  between the treatments (section 2.2). The halo carries the same angular
+  variance as the geometric blur, only in few rays.</li>
+<li><strong>Enough rays for the halo.</strong> At 1000 eV about 3 % of the rays reflected by
+  QMAP M6 are scattered, and they spread over a few micrometres around a
+  40 nm core. Halo shapes need correspondingly many rays; FWHM and encircled
+  energies converge like any other trace.</li>
+<li><strong>Coating roughness.</strong> The Névot–Croce roughness of a coating [11] lowers the
+  reflectivity for microroughness below the resolution of a map. It is a
+  separate input; do not enter the roughness a profile already contains as
+  coating roughness as well.</li>
+</ul>
+<h2 id="6-validation">6. Validation<a class="headerlink" href="#6-validation" title="Permanent link">&para;</a></h2>
+<h3 id="61-the-statistics-of-the-implementation">6.1 The statistics of the implementation<a class="headerlink" href="#61-the-statistics-of-the-implementation" title="Permanent link">&para;</a></h3>
+<p><code>test/unit/surfacescattering/test_surfscat.f90</code> drives <code>SURFSCAT_SETUP</code> and
+<code>SURFSCAT_APPLY</code> directly. It uses a periodic, Gaussian-correlated profile of
+1024 x 128 points with 0.25 nm rms, 4° grazing incidence and 400 000 rays per
+case. One run gave:</p>
+<table>
+<thead>
+<tr>
+<th>check</th>
+<th style="text-align: right;">result</th>
+<th style="text-align: right;">expected</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sigma_h</code> of the table</td>
+<td style="text-align: right;">0.25000 nm</td>
+<td style="text-align: right;">0.25000 nm</td>
+</tr>
+<tr>
+<td>specular fraction, <code>mu</code> = 0.1</td>
+<td style="text-align: right;">0.90467</td>
+<td style="text-align: right;"><code>exp(-0.1)</code> = 0.90484</td>
+</tr>
+<tr>
+<td>halo rms of the scattered rays, <code>mu</code> = 0.1</td>
+<td style="text-align: right;">3.242e-7 rad</td>
+<td style="text-align: right;">3.244e-7 rad, from the PSD</td>
+</tr>
+<tr>
+<td>rms deflection in plane, <code>mu</code> = 0.1, 30, 400</td>
+<td style="text-align: right;">1.0009e-7, 1.0007e-7, 0.9999e-7 rad</td>
+<td style="text-align: right;"><code>2 m_z</code> = 1.0008e-7 rad</td>
+</tr>
+<tr>
+<td>rms deflection across, <code>mu</code> = 0.1, 30, 400</td>
+<td style="text-align: right;">1.785e-8, 1.786e-8, 1.781e-8 rad</td>
+<td style="text-align: right;"><code>2 sin(theta) m_x</code> = 1.783e-8 rad</td>
+</tr>
+<tr>
+<td>edge diffraction FWHM, in plane / across</td>
+<td style="text-align: right;">1.025 / 1.025</td>
+<td style="text-align: right;">1, i.e. <code>0.886 lambda / D</code></td>
+</tr>
+<tr>
+<td>grating, <code>alpha</code> = 0.87°, <code>beta</code> = 1.95°: specular fraction, <code>mu</code> = 0.3</td>
+<td style="text-align: right;">0.7428; six further runs 0.7393 to 0.7413</td>
+<td style="text-align: right;"><code>exp(-0.3)</code> = 0.7408</td>
+</tr>
+<tr>
+<td>grating: edge diffraction FWHM with <code>L sin(beta)</code></td>
+<td style="text-align: right;">1.025</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+<p>The FWHM is read from a histogram with a bin of 0.025 of the expected width.
+The rms deflection is the same at every phase error, as section 2.2 states,
+and equals twice the slope the table's PSD implies. From finite differences of
+the map the slope comes out about 2.5 % different, because of the window and the
+discretisation; that is a property of the slope estimate, not of the
+scattering. The test exits with status 1 if a check leaves its tolerance of
+about four standard errors; eight repeated runs passed.</p>
+<h3 id="62-against-srw">6.2 Against SRW<a class="headerlink" href="#62-against-srw" title="Permanent link">&para;</a></h3>
+<p>The QMAP beamline of section 1 was traced with ideal mirrors up to M4 and the
+synthetic directional-PSD maps of M5 and M6 as profile files: a Gaussian
+undulator source with a 0.07 % band, 10^6 rays per point. Four variants differ
+only in the two settings on M5 and M6. The Focus and exit-slit rays were reduced
+with the same metrics as the SRW intensities:
+- the FWHM around the highest peak, from a histogram with a bin of 1/20 of the
+  50 % width, smoothed 1-2-1;
+- the narrowest intervals holding 80 and 90 % of the power, EE80 and EE90.</p>
+<p>The SRW reference at 400 and 1000 eV is the 0.07 % band with 328
+macro-electrons. At 50 to 150 eV it is monochromatic with 64 macro-electrons.
+Those low-energy runs predate a phase fix in SRW's focal transforms that moved
+the illumination of M6, so they are provisional, and only the horizontal axis
+is compared there.</p>
+<p><strong>Regression.</strong> With both settings at their defaults, this branch traces
+bit-identically to dev: the same Focus rays, checksum included, at 50 eV with
+400 000 rays.</p>
+<p><strong>Focus, horizontal</strong> (FWHM / EE80 / EE90 in nm; M6 footprint from RAY-UI):</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">E [eV]</th>
+<th style="text-align: right;">M6 lit</th>
+<th style="text-align: right;">SRW</th>
+<th style="text-align: right;">geometric</th>
+<th style="text-align: right;">wave-optical</th>
+<th style="text-align: right;">wave-optical + edge on M6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">200 mm</td>
+<td style="text-align: right;">321.8 / 390.9 / 634.2</td>
+<td style="text-align: right;">148.5 / 213.1 / 301.1</td>
+<td style="text-align: right;">107.1 / 163.9 / 240.8</td>
+<td style="text-align: right;">230.8 / 399.6 / 605.5</td>
+</tr>
+<tr>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">200 mm</td>
+<td style="text-align: right;">166.0 / 413.2 / 1331</td>
+<td style="text-align: right;">139.1 / 186.8 / 254.3</td>
+<td style="text-align: right;">85.5 / 111.7 / 154.4</td>
+<td style="text-align: right;">134.7 / 229.5 / 350.6</td>
+</tr>
+<tr>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">200 mm</td>
+<td style="text-align: right;">115.0 / 192.8 / 351.2</td>
+<td style="text-align: right;">139.0 / 177.5 / 240.3</td>
+<td style="text-align: right;">69.4 / 93.4 / 126.8</td>
+<td style="text-align: right;">105.3 / 166.1 / 248.1</td>
+</tr>
+<tr>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">200 mm</td>
+<td style="text-align: right;">–</td>
+<td style="text-align: right;">141.3 / 179.9 / 240.8</td>
+<td style="text-align: right;">66.7 / 83.2 / 112.8</td>
+<td style="text-align: right;">89.1 / 134.2 / 199.9</td>
+</tr>
+<tr>
+<td style="text-align: right;">400</td>
+<td style="text-align: right;">175 mm</td>
+<td style="text-align: right;">59.7 / 74.1 / 110.8</td>
+<td style="text-align: right;">147.4 / 180.8 / 239.1</td>
+<td style="text-align: right;">50.1 / 63.4 / 84.9</td>
+<td style="text-align: right;">61.2 / 87.3 / 124.3</td>
+</tr>
+<tr>
+<td style="text-align: right;">800</td>
+<td style="text-align: right;">136 mm</td>
+<td style="text-align: right;">–</td>
+<td style="text-align: right;">152.6 / 186.4 / 243.2</td>
+<td style="text-align: right;">42.5 / 51.4 / 68.1</td>
+<td style="text-align: right;">48.2 / 62.0 / 85.9</td>
+</tr>
+<tr>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">117 mm</td>
+<td style="text-align: right;">42.0 / 49.3 / 66.7</td>
+<td style="text-align: right;">163.5 / 190.3 / 249.3</td>
+<td style="text-align: right;">40.8 / 49.7 / 66.2</td>
+<td style="text-align: right;">44.7 / 58.2 / 80.0</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Underfilled M6, high energy.</strong> The wave-optical treatment alone
+  reproduces SRW: at 1000 eV within -3, +1 and -1 %, where the geometric focus
+  is 3.9 times too wide. Edge diffraction would add 10 to 20 % here, see
+  section 4.2.</li>
+<li><strong>Overfilled M6, low energy.</strong> The wave-optical treatment alone is too
+  narrow, because it removes the slope blur and adds no diffraction. With edge
+  diffraction on M6, EE80 and EE90 lie within +2 and -5 % of SRW at 50 eV,
+  against -45 and -53 % for the geometric trace. The FWHM stays 28 % small, as
+  section 4.2 explains. At 150 eV the three widths lie -8, -14 and -29 % from
+  SRW. At 100 eV the provisional SRW run has tails to 1.3 um in EE90, so only
+  its FWHM, 166 against 135 nm, is compared.</li>
+<li><strong>The geometric agreement near 100 to 150 eV is a coincidence.</strong> A slope blur
+  that is too large stands in for the missing diffraction. The FWHM happens to
+  fit, but the enclosed energies do not, for example EE90 at 150 eV: 240 nm
+  against 351 nm in SRW.</li>
+<li><strong>Partly filled M6, 400 eV.</strong> SRW lies between the two settings: -16, -14
+  and -23 % without edge diffraction, +3, +18 and +12 % with it. A deflection
+  for the full aperture cannot represent a mirror that clips only the tails of
+  the beam.</li>
+<li><strong>Edge diffraction on M5 as well</strong> widens the focus by a further 0 to 9 %.
+  M5 is filled to 346 of its 500 mm at 50 eV and 243 mm at 100 eV, so it does
+  not clip, and the setting stays off there.</li>
+</ul>
+<p><strong>Focus, vertical</strong> (0.07 % band in both codes, FWHM / EE80 / EE90 in nm):</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">E [eV]</th>
+<th style="text-align: right;">SRW</th>
+<th style="text-align: right;">geometric</th>
+<th style="text-align: right;">wave-optical</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">400</td>
+<td style="text-align: right;">86.7 / 72.5 / 83.7</td>
+<td style="text-align: right;">94.4 / 104.2 / 133.6</td>
+<td style="text-align: right;">89.7 / 81.3 / 99.7</td>
+</tr>
+<tr>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">94.8 / 80.1 / 90.6</td>
+<td style="text-align: right;">105.3 / 107.2 / 134.4</td>
+<td style="text-align: right;">104.5 / 89.7 / 107.9</td>
+</tr>
+</tbody>
+</table>
+<p>The wave-optical treatment reduces the excess in EE80 from 34 to 44 % to 12 %
+and in EE90 from 48 to 60 % to 19 %. The rest was not traced further here.</p>
+<p><strong>Exit slit.</strong> The two settings act only on M5 and M6. The exit slit is
+identical in all variants: 14.9 to 15.0 um vertically against 15.1 um in SRW.
+Horizontally, RAY-UI is already wider at the slit at low energy: 25.8 against
+17.1 um at 50 eV, 14.0 against 10.0 um at 150 eV, and 5.9 against 6.1 um at
+1000 eV. That comes from the source model, not from the mirrors, and it enters
+the horizontal focus from 50 to 150 eV.</p>
+<p><strong>Statistics.</strong> 8 000 of the 10^6 rays reach the focus at 50 eV and 105 000 at
+1000 eV. Repeated traces of the same variant are identical, so the scatter
+between neighbouring energies is the only measure of the ray noise. At 50 eV
+it is a few percent in the enclosed energies.</p>
+<p><strong>Recommendation.</strong>
+- Use the wave-optical treatment for every mirror with a measured or modelled
+  profile.
+- Switch edge diffraction on only for mirrors whose footprint fills their
+  length, as M6 up to 200 eV.
+- Where a mirror clips only the tails of the beam, the traces with and without
+  edge diffraction bracket the result.</p>
+<h3 id="63-gratings-in-a-trace">6.3 Gratings in a trace<a class="headerlink" href="#63-gratings-in-a-trace" title="Permanent link">&para;</a></h3>
+<p>The RAY-UI test beamline <code>test/scripting/GratingEfficiencyTest.rml</code> was changed
+to a collimated, monochromatic 400 eV beam that overfills its 200 x 50 mm plane
+grating: 150 l/mm, grazing incidence 0.867° and exit 1.950°. Without surface
+errors every diffracted ray leaves in the same direction. The fraction of rays
+still in that direction, and the angular spread, can therefore be measured
+directly at the image plane, with 10^6 rays traced and 95 000 arriving.</p>
+<table>
+<thead>
+<tr>
+<th>check</th>
+<th style="text-align: right;">trace</th>
+<th style="text-align: right;">expected</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>specular fraction, wave-optical, synthetic profile with <code>sigma_h</code> = 7 nm</td>
+<td style="text-align: right;">0.6129 ± 0.0016</td>
+<td style="text-align: right;"><code>exp(-mu)</code> = 0.6147; with <code>beta</code> alone, as on a mirror, 0.393</td>
+</tr>
+<tr>
+<td>angular FWHM in the dispersion plane, edge diffraction on</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">1, i.e. <code>0.886 lambda / (L sin(beta))</code></td>
+</tr>
+<tr>
+<td>angular FWHM across it</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">1, i.e. <code>0.886 lambda / W</code></td>
+</tr>
+<tr>
+<td>both settings off</td>
+<td style="text-align: right;">no spread</td>
+<td style="text-align: right;">none</td>
+</tr>
+</tbody>
+</table>
+<p>The widths come from a histogram with a bin of 1/40 of the expected width.</p>
+<p>With both settings at their defaults the three grating routines trace
+bit-identically to dev:
+- QMAP, with its plane grating, at 50 eV;
+- <code>RAYpy/rml/beamline.rml</code>, with a spherical grating;
+- the same beamline with its grating loaded as a toroidal grating.</p>
+<p>With edge diffraction on, the same beamlines keep their ray counts and change
+their directions. The mirror traces of section 6.2 are also bit-identical
+before and after the grating routine was split off.</p>
+<p>The gratings have not yet been compared with a wave-optics code.</p>
+<h2 id="7-assumptions-and-limits">7. Assumptions and limits<a class="headerlink" href="#7-assumptions-and-limits" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Statistics, not the local patch.</strong> The table describes the whole map as a
+  stationary Gaussian process. A ray scatters according to the statistics of the
+  surface, not according to the particular patch it hits. A single deterministic
+  feature, such as a bump or a bend, is averaged into the halo. Deterministic
+  figure shapes belong in the geometric treatment.</li>
+<li><strong>Kirchhoff approximation.</strong> The treatment is scalar, with small slopes and
+  without shadowing or multiple scattering on the surface. Grazing-incidence
+  mirrors satisfy all of these.</li>
+<li><strong>Reflectivity.</strong> A scattered ray keeps the reflectivity computed for the
+  specular direction, and on a grating the efficiency of its order.</li>
+<li><strong>Grating mounts.</strong> The edge deflection uses the apertures <code>L sin(beta)</code> and
+  <code>W</code> about the diffracted ray. That is exact when the ray lies in the plane of
+  the grating length, as in the classical in-plane mount. In off-plane and
+  conical mounts (<code>REFRAC2D</code>) the projected aperture is a parallelogram, and
+  the separable deflection is an approximation. The reflection zone plate
+  (<code>RZP</code>), whose two-step diffraction differs from a grating's, is not included.</li>
+<li><strong>Resolution of the map.</strong> Spatial periods longer than the map or shorter than
+  twice its spacing are missing from the PSD.</li>
+<li><strong>Edge diffraction.</strong> See section 4.2.</li>
+<li><strong>Threads and reproducibility.</strong> The tables are module state and the draws
+  use the Fortran <code>random_number</code> generator. Both are safe because RAY-UI
+  traces optical elements single-threaded: no mirror sets <code>isThreadSafe</code>, so
+  the OpenMP ray loop of the renderer never runs over them. A mirror marked
+  thread-safe would need per-thread generators. A given beamline, ray number
+  and build traces to identical rays on every run.</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ol>
+<li>P. Beckmann, A. Spizzichino, <em>The Scattering of Electromagnetic Waves from
+   Rough Surfaces</em>, Pergamon, Oxford (1963).</li>
+<li>J. E. Harvey, <em>Light-scattering characteristics of optical surfaces</em>, PhD
+   thesis, University of Arizona (1976).</li>
+<li>J. E. Harvey, A. Krywonos, C. L. Vernold, "Modified Beckmann–Kirchhoff
+   scattering model for rough surfaces with large incident and scattering
+   angles", Opt. Eng. <strong>46</strong>, 078002 (2007).</li>
+<li>S. K. Sinha, E. B. Sirota, S. Garoff, H. B. Stanley, "X-ray and neutron
+   scattering from rough surfaces", Phys. Rev. B <strong>38</strong>, 2297 (1988).</li>
+<li>H. E. Bennett, J. O. Porteus, "Relation between surface roughness and
+   specular reflectance at normal incidence", J. Opt. Soc. Am. <strong>51</strong>, 123
+   (1961).</li>
+<li>E. L. Church, H. A. Jenkinson, J. M. Zavada, "Relationship between surface
+   scattering and microtopographic features", Opt. Eng. <strong>18</strong>, 125 (1979).</li>
+<li>J. C. Stover, <em>Optical Scattering: Measurement and Analysis</em>, 3rd ed., SPIE
+   Press, Bellingham (2012).</li>
+<li>E. R. Freniere, G. G. Gregory, R. A. Hassler, "Edge diffraction in Monte
+   Carlo ray tracing", Proc. SPIE <strong>3780</strong>, Optical Design and Analysis Software
+   (1999).</li>
+<li>M. J. Bastiaans, "The Wigner distribution function applied to optical
+   signals and systems", Opt. Commun. <strong>25</strong>, 26 (1978).</li>
+<li>X. Shi, R. Reininger, M. Sanchez del Rio, L. Assoufid, "A hybrid method for
+    X-ray optics simulation: combining geometric ray-tracing and wavefront
+    propagation", J. Synchrotron Rad. <strong>21</strong>, 669 (2014).</li>
+<li>L. Névot, P. Croce, "Caractérisation des surfaces par réflexion rasante de
+    rayons X", Rev. Phys. Appl. <strong>15</strong>, 761 (1980).</li>
+<li>M. Born, E. Wolf, <em>Principles of Optics</em>, 7th ed., Cambridge University
+    Press (1999): the Strehl ratio and the Maréchal criterion (section 9.1),
+    Fraunhofer diffraction at a slit (section 8.5).</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.top", "content.code.copy"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
