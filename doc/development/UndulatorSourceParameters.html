@@ -1,0 +1,1016 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for RAY-UI, ray tracing for synchrotron beamlines">
+      
+      
+      
+        <link rel="canonical" href="https://hz-b.github.io/ray-installers/doc/development/UndulatorSourceParameters.html">
+      
+      
+        <link rel="prev" href="FieldPropagationInUrad.html">
+      
+      
+        <link rel="next" href="RayDirectionsAndTheWignerDistribution.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Undulator Source parameters - RAY-UI Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#undulator-source-parameters" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="RAY-UI Documentation" class="md-header__button md-logo" aria-label="RAY-UI Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RAY-UI Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Undulator Source parameters
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/hz-b/ray-installers" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="RAY-UI Documentation" class="md-nav__button md-logo" aria-label="RAY-UI Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    RAY-UI Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/hz-b/ray-installers" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="LooperPresetFormat.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Looper preset format
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="SurfaceScattering.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Surface errors and edge diffraction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="FieldPropagationInUrad.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Field propagation in urad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Undulator Source parameters
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="UndulatorSourceParameters.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Undulator Source parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#accelerator-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accelerator Data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#insertion-device-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Insertion Device Data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-of-undulator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Type of Undulator
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ellipticity-ratio-kxky-and-field-phase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ellipticity Ratio Kx/Ky and Field Phase δ
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#auto-photon-energy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auto Photon Energy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#electron-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Electron Distribution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#electron-energy-spread-and-energy-spread-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Electron Energy Spread and Energy Spread Nodes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#field-propagation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Field Propagation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ray-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ray Generation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ray-per-electron-incl-diffraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ray per electron incl. diffraction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#photon-weights-and-electrons-per-ray" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Photon Weights and Electrons per Ray
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#undulator-ends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Undulator Ends
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="RayDirectionsAndTheWignerDistribution.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ray generation and the Wigner distribution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#accelerator-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accelerator Data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#insertion-device-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Insertion Device Data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-of-undulator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Type of Undulator
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ellipticity-ratio-kxky-and-field-phase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ellipticity Ratio Kx/Ky and Field Phase δ
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#auto-photon-energy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auto Photon Energy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#electron-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Electron Distribution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#electron-energy-spread-and-energy-spread-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Electron Energy Spread and Energy Spread Nodes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#field-propagation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Field Propagation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ray-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ray Generation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ray-per-electron-incl-diffraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ray per electron incl. diffraction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#photon-weights-and-electrons-per-ray" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Photon Weights and Electrons per Ray
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#undulator-ends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Undulator Ends
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="undulator-source-parameters">Undulator Source parameters<a class="headerlink" href="#undulator-source-parameters" title="Permanent link">&para;</a></h1>
+<p>What the parameters of the Undulator Source do, in full. The tooltip behind
+each parameter's information icon gives the short form, at most four lines;
+this page has the rest, and points to the pages that go into the physics.</p>
+<p>The first four parameters below belong to the accelerator and
+insertion-device block that the Gaussian Undulator shares, and read the same
+there.</p>
+<hr />
+<h2 id="accelerator-data">Accelerator Data<a class="headerlink" href="#accelerator-data" title="Permanent link">&para;</a></h2>
+<p><strong>by data file</strong>: the accelerator, its Twiss parameters and the
+insertion-device values are taken from the accelerator data file, selected
+with the dropdowns below this parameter.</p>
+<p><strong>by parameters</strong>: there is no data file behind the source. The dropdowns are
+hidden and every value is entered by hand.</p>
+<p>Which file is used is set in <em>Preferences &gt; Linked Files &gt; accelerator data</em>,
+also reachable from the context menu of this parameter. Its name is kept as
+<strong>Accelerator Data File</strong>, read-only, and written to the beamline file, so
+that it stays on record which data a result was computed with.</p>
+<p>The file format and where its values come from are described in
+<code>doc/AcceleratorDataFile.md</code> in the source tree.</p>
+<h2 id="insertion-device-data">Insertion Device Data<a class="headerlink" href="#insertion-device-data" title="Permanent link">&para;</a></h2>
+<p><strong>by data file</strong>: one of the accelerator's insertion devices is picked from
+the selector, and its type, period length, number of periods and minimal
+energy follow it.</p>
+<p><strong>by parameters</strong>: a device of your own. The selector is hidden and those
+values are entered by hand, while the electron beam can still come from the
+accelerator data.</p>
+<h2 id="type-of-undulator">Type of Undulator<a class="headerlink" href="#type-of-undulator" title="Permanent link">&para;</a></h2>
+<p><strong>horizontal</strong>, <strong>vertical</strong>, <strong>inclined</strong>: linear polarisation.
+<strong>circular</strong>, <strong>elliptical</strong>: a phase of 90° between the two field
+components. All of them are special cases of the elliptical undulator, with
+field components Kx and Ky.</p>
+<p>On "auto" the type follows the <em>Polarisation Type</em> of the selected insertion
+device, and the types the device cannot be run as are greyed out.</p>
+<h2 id="ellipticity-ratio-kxky-and-field-phase">Ellipticity Ratio Kx/Ky and Field Phase δ<a class="headerlink" href="#ellipticity-ratio-kxky-and-field-phase" title="Permanent link">&para;</a></h2>
+<p>The <strong>ellipticity ratio</strong> r = Kx/Ky of the elliptical undulator, with
+Kx² + Ky² = K² kept: r = 1 is circular (at δ = 90°), r = 0 horizontal.</p>
+<p>The <strong>field phase</strong> δ between the two field components: δ = 0° is linear
+(inclined), δ = 90° an ellipse or a circle with its axes along x and y, and
+in between a tilted ellipse. The polarisation (S1, S2, S3) follows from δ and
+Kx/Ky. Together, Kx, Ky and δ cover APPLE-type devices of variable
+polarisation.</p>
+<h2 id="auto-photon-energy">Auto Photon Energy<a class="headerlink" href="#auto-photon-energy" title="Permanent link">&para;</a></h2>
+<p>What <strong>Photon Energy</strong> becomes on "auto".</p>
+<p><strong>spectral brightness maximum (harmonic)</strong>: the harmonic energy, where the
+flux on the axis and the spectral brightness peak. Spectral brightness is
+flux per area per solid angle per ‰ bandwidth, the figure of merit sources
+are compared by; brightness without the adjective is the quantity
+integrated over the band (see <code>doc/BrightnessNomenclature.md</code>). Strictly
+the spectral brightness peaks exactly at the harmonic only without energy
+spread; with it the peak moves slightly below, far less than the flux
+maximum does.</p>
+<p><strong>flux maximum through pinhole</strong>: below the harmonic energy the resonance
+moves off the axis onto a ring, and the flux through the pinhole peaks about
+one line width E/(nN) lower, with up to three quarters more of it. That
+energy is found by one urad run over the pinhole at 25 energies, some 0.1 to
+0.3 s, with the electron beam and, when it is folded in, the energy spread.</p>
+<p>More: <a href="FieldPropagationInUrad.html">Field propagation in urad, §15</a>.</p>
+<h2 id="electron-distribution">Electron Distribution<a class="headerlink" href="#electron-distribution" title="Permanent link">&para;</a></h2>
+<p>The electron beam the source traces. The parameter belongs to the
+accelerator block; the Gaussian Undulator and the Dipole Source offer only
+its first two entries.</p>
+<p><strong>manual</strong>: the beam sizes and divergences as entered. urad traces a beam
+at its waist with the emittance σ·σ′ and the beta function σ/σ′ of each
+plane; the entered sizes already hold whatever the dispersion adds, so no
+dispersion is added on top. (They used to reach only RAY's common block,
+while urad traced the lattice's beam whatever was entered.)</p>
+<p><strong>derived by accelerator parameters</strong>: from the natural emittance, the
+coupling constant, the beta functions and the dispersion (Peatman, p. 27).</p>
+<p><strong>zero emittance</strong>: no beam size and no beam divergence; the energy spread
+is kept. The sizes and divergences show zero.</p>
+<p><strong>single electron</strong>: no energy spread either, the radiation of one
+electron. That shows the single-electron source on its own: on the UE65 at
+300 eV it is some 35 µm wide in both planes, which is what Wigner (alpha)
+and the angular spectrum carry, and ray per electron incl. diffraction;
+plain ray per electron puts every ray of a single electron at the axis.</p>
+<h2 id="electron-energy-spread-and-energy-spread-nodes">Electron Energy Spread and Energy Spread Nodes<a class="headerlink" href="#electron-energy-spread-and-energy-spread-nodes" title="Permanent link">&para;</a></h2>
+<p>urad is driven with a single electron, so the relative energy spread has no
+effect unless it is folded in.</p>
+<p><strong>ignored</strong>: no energy spread.</p>
+<p><strong>folded along photon energy</strong>: the field is computed at several photon
+energies around the traced one, σ = 2·E·spread, and their intensities are
+added with Gaussian weights. It multiplies the propagation by the number of
+energies, which the Fourier transform keeps affordable.</p>
+<p><strong>folded, fast period sum</strong>: the same fold. It computes the geometry of every
+period once for all energies and steps the phase from one energy to the
+next, where the other recomputes both for every energy.</p>
+<p><strong>Energy Spread Nodes</strong>: the number of photon energies the fold uses, odd,
+spread over ±3 σ of the photon energy spread. 3 nodes are the Gauss-Hermite
+rule instead: ±√3 σ with weights 1/6, 2/3, 1/6. The nodes matter only when
+the spread is folded in.</p>
+<p>More: <a href="FieldPropagationInUrad.html">Field propagation in urad, §10</a>.</p>
+<h2 id="field-propagation">Field Propagation<a class="headerlink" href="#field-propagation" title="Permanent link">&para;</a></h2>
+<p><strong>Fourier transform</strong>: the back-propagation from the pinhole to the source
+plane as a convolution computed by FFT, some three orders of magnitude faster
+than the direct sum. It cuts the source grid out of its own output, so with
+the transform the source window is not an input, and it is hidden.</p>
+<p><strong>direct sum</strong>: the original, exact to the sixth order of the path expansion,
+and by far the slowest step of a trace.</p>
+<p>More: <a href="FieldPropagationInUrad.html">Field propagation in urad, §§2–6</a>.</p>
+<h2 id="ray-generation">Ray Generation<a class="headerlink" href="#ray-generation" title="Permanent link">&para;</a></h2>
+<p>How a ray is generated from urad's field: its origin and its direction.</p>
+<p><strong>angular spectrum</strong> (the default): the direction is drawn from |FFT(E)|² of
+the pinhole field, with the electron beam's angular spread folded in, and the
+origin from the back-propagated source. Source size, divergence and waist are
+right; the pinhole pattern is smeared by the source size. It costs two
+transforms per photon energy.</p>
+<p><strong>Wigner (alpha)</strong>: a coupled pair, the origin and the pinhole point drawn together, from a
+non-negative coupling whose two marginals are the intensities urad computes
+and whose correlation comes from the Wigner distribution. The ray then
+arrives at the pinhole point exactly, so the pattern and the source size both
+hold by construction and the waist is at z = 0, at the price of a divergence
+some 2 % narrow and some ten to thirty seconds per photon energy.</p>
+<p><strong>ray per electron</strong>: urad radiates one electron at a time, each drawn
+from the beam with its energy deviation, each to one point drawn in the
+pinhole; the electron becomes a ray from where it crosses the undulator
+centre to that point. Divergence and energy spread are exact without any
+fold. The electron's ray carries the electron beam's size only: the
+single-electron source, which only the back-propagation knows, is missing.
+For comparison, and with BRILL's urad_get_photons, which does the same.</p>
+<p><strong>ray per electron incl. diffraction</strong>: the same electrons, with the
+single-electron source on top (below).</p>
+<p>The first draw, a point in the pinhole plane minus an origin drawn
+independently, has been removed. Two independent draws subtracted are not
+independent coordinates: it left ⟨x₀x′⟩ = −σ₀²/L, so the ensemble's waist sat
+at L·σ₀²/(σ₀² + σ_P²) rather than at z = 0, some 440 mm off, and the source
+size entered the divergence a second time instead of cancelling.</p>
+<p>More: <a href="RayDirectionsAndTheWignerDistribution.html">Ray generation and the Wigner distribution</a>.</p>
+<h2 id="ray-per-electron-incl-diffraction">Ray per electron incl. diffraction<a class="headerlink" href="#ray-per-electron-incl-diffraction" title="Permanent link">&para;</a></h2>
+<p>Each ray of an electron is shifted, origin and pinhole point together, by a
+displacement δ drawn per ray from the single-electron source: the
+back-propagated, unfolded intensity of one electron's field, as a 2D map of
+the source plane, the same for every electron. The source size is then the
+electron beam's and the single-electron source's together, as the angular
+spectrum and Wigner (alpha) have it.</p>
+<p>The shift moves the whole ray rather than the origin alone: moving only the
+origin would tie the direction to δ, and pull the waist off z = 0 the way the
+removed pinhole difference did.</p>
+<p>The shift alone would count the single-electron source twice at the pinhole.
+At a waist σ_P² = Σ² + L²Σ′², so the electron's pinhole point already holds
+it, and so does its direction u = pinhole point − electron, by σ_r²/L². The
+directions are therefore narrowed about their mean, per plane, by
+s = √(1 − var δ / var u), some 0.98 at 10 m on the UE65 at 300 eV. The pinhole
+pattern is then the electron's again in its rms, the divergence loses what it
+had too much, and the waist stays at z = 0, since δ and the electron are
+independent of u.</p>
+<p>What it does not carry: the narrowing holds the second moments, not the
+shape, and the correlation inside the single-electron source, the X its
+Wigner distribution shows, which only Wigner (alpha) has.</p>
+<h2 id="photon-weights-and-electrons-per-ray">Photon Weights and Electrons per Ray<a class="headerlink" href="#photon-weights-and-electrons-per-ray" title="Permanent link">&para;</a></h2>
+<p>Both apply to the two <strong>ray per electron</strong> settings only. Photon Weights
+decides how much S0 each ray, each photon bundle, carries.</p>
+<p><strong>Photon Weights = equal, by rejection</strong>: an electron is kept with the
+probability its weight gives, so that every ray carries the same S0. One
+electron in 15 to 30 is kept on the UE65. urad runs in batches until enough
+are kept, some 50 000 electrons a second.</p>
+<p><strong>Photon Weights = unequal, S0 per ray</strong>: every electron is kept, and its ray
+carries the electron's weight as S0, scaled so that the rays together carry
+the flux. That is 15 to 25 times fewer electrons for the same number of rays,
+but the rays carry unequal S0 and are worth fewer rays of equal weight than
+their count, which the trace reports. The analyses weight by S0, so both
+settings give the same distributions.</p>
+<p><strong>Electrons per Ray</strong> is the most electrons urad radiates per ray with equal
+weights. When the limit is reached first, rays are used more than once, which
+the trace reports. With unequal weights there is nothing to reject and it is
+greyed out.</p>
+<p>The electrons are also bounded by memory: every one is kept until the last
+batch, some 90 bytes each, within the budget Wigner (alpha) has as well, an
+eighth of the machine's memory -- some 20 million electrons on 16 GB, six
+minutes or so. <code>RAYUI_URAD_COUPLING_MB</code> sets the budget. At 400 eV on the
+UE65 one electron in 30 is kept, so 200 000 rays take some 6 million.</p>
+<p>More: <a href="RayDirectionsAndTheWignerDistribution.html">Ray generation and the Wigner distribution, §8</a>.</p>
+<h2 id="undulator-ends">Undulator Ends<a class="headerlink" href="#undulator-ends" title="Permanent link">&para;</a></h2>
+<p><strong>hard</strong>: exactly the number of periods, as urad always had it.</p>
+<p><strong>1/4-3/4 end poles</strong>: end poles at 3/4 and 1/4 of the peak field, which zero
+the first field integral and centre the oscillation (Clarke, <em>The Science and
+Technology of Undulators and Wigglers</em>, 2004, sec. 7.5.1).</p>
+<p><strong>soft (as SRW)</strong>: the field continued past its last zero crossing and damped
+by a Gaussian, as SRW ends an undulator.</p>
+<p>Above the resonance the ends change the source by 10 to 20 %. They are
+tracked apart from the period sum and cost time.</p>
+<p>More: <a href="FieldPropagationInUrad.html">Field propagation in urad, §11</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.top", "content.code.copy"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

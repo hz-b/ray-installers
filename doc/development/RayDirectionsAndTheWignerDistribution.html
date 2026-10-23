@@ -1,0 +1,1322 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for RAY-UI, ray tracing for synchrotron beamlines">
+      
+      
+      
+        <link rel="canonical" href="https://hz-b.github.io/ray-installers/doc/development/RayDirectionsAndTheWignerDistribution.html">
+      
+      
+        <link rel="prev" href="UndulatorSourceParameters.html">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Ray generation and the Wigner distribution - RAY-UI Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ray-generation-and-the-wigner-distribution" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="RAY-UI Documentation" class="md-header__button md-logo" aria-label="RAY-UI Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RAY-UI Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Ray generation and the Wigner distribution
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/hz-b/ray-installers" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="RAY-UI Documentation" class="md-nav__button md-logo" aria-label="RAY-UI Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    RAY-UI Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/hz-b/ray-installers" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="LooperPresetFormat.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Looper preset format
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="SurfaceScattering.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Surface errors and edge diffraction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="FieldPropagationInUrad.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Field propagation in urad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="UndulatorSourceParameters.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Undulator Source parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ray generation and the Wigner distribution
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="RayDirectionsAndTheWignerDistribution.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ray generation and the Wigner distribution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tutorial-which-setting-and-what-it-costs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tutorial: which setting, and what it costs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-why-the-obvious-way-cannot-be-right" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Why the obvious way cannot be right
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-the-wigner-distribution-ported-from-brill" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. The Wigner distribution, ported from BRILL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-why-not-husimi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Why not Husimi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-the-coupling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. The coupling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-why-not-signed-weights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Why not signed weights
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-what-it-does-to-the-beamline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. What it does to the beamline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-what-is-open" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. What is open
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-ray-per-electron-and-whether-the-back-propagation-is-still-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Ray per electron, and whether the back-propagation is still needed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-the-code-is" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where the code is
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tutorial-which-setting-and-what-it-costs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tutorial: which setting, and what it costs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-why-the-obvious-way-cannot-be-right" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Why the obvious way cannot be right
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-the-wigner-distribution-ported-from-brill" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. The Wigner distribution, ported from BRILL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-why-not-husimi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Why not Husimi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-the-coupling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. The coupling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-why-not-signed-weights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Why not signed weights
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-what-it-does-to-the-beamline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. What it does to the beamline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-what-is-open" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. What is open
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-ray-per-electron-and-whether-the-back-propagation-is-still-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Ray per electron, and whether the back-propagation is still needed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-the-code-is" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where the code is
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ray-generation-and-the-wigner-distribution">Ray generation and the Wigner distribution<a class="headerlink" href="#ray-generation-and-the-wigner-distribution" title="Permanent link">&para;</a></h1>
+<p>How the Undulator Source turns a computed field into rays, why the obvious way
+cannot be right, and what the three settings of <strong>Ray Generation</strong> do about
+it.</p>
+<p>This supersedes §13 of <code>FieldPropagationInUrad.md</code>, which noted the idea while
+it was still open. Everything below is implemented and measured, on the UE65
+of BESSY III and a soft X-ray beamline behind it.</p>
+<hr />
+<h2 id="tutorial-which-setting-and-what-it-costs">Tutorial: which setting, and what it costs<a class="headerlink" href="#tutorial-which-setting-and-what-it-costs" title="Permanent link">&para;</a></h2>
+<p>The source parameter <strong>Ray Generation</strong> has three settings. A fourth, the
+<strong>pinhole difference</strong> -- a point drawn in the pinhole plane minus an origin
+drawn apart from it, what RAY-UI produced first -- has been removed: it put
+the waist some 440 mm off and counted the source size into the divergence
+twice (§1). The measurements below keep it for comparison.</p>
+<p><strong><code>angular spectrum</code></strong> — <strong>the default.</strong> The direction is drawn from
+|FFT(E)|² of the pinhole field, with the electron beam's angular spread
+folded in, and the origin from the back-propagated source. Costs two
+transforms per photon energy, a few tenths of a second. It is what shadow4
+does in its best setting (<code>flag_size = 2</code>: the size back-propagated, the
+directions from the far field) and in spirit what xrt does (directions from
+the far field, the size a Gaussian); it gets the source size, the divergence
+and the waist right and smears the pinhole pattern by the source size.</p>
+<p>A file that stores no Ray Generation -- one saved before the parameter
+existed, or with its forerunner Ray Directions -- is traced with the angular
+spectrum.</p>
+<p><strong><code>Wigner (alpha)</code></strong> — a <em>coupled pair</em>: the origin and the pinhole point are drawn <em>together</em>
+from a non-negative coupling built from the Wigner distribution. Costs the
+distribution (0.4 s) plus the coupling (2.1 s) per photon energy. Take it when
+the pinhole pattern, the source size and the position of the waist all matter
+at once — which is the case whenever an aperture downstream cuts into the
+beam, because then the pattern decides what passes.</p>
+<p><strong><code>ray per electron</code></strong> — urad radiates one electron at a time, each drawn
+from the beam with its position, angle and energy deviation, each to one
+point of its own in the pinhole; the electron becomes a ray from where it
+crosses the undulator centre to that point. No fold: the energy spread and
+the flux come out of the electrons themselves. The electron's ray carries
+only the electron beam's size. <strong><code>ray per electron incl. diffraction</code></strong>
+shifts each ray by a draw from the single-electron source and narrows the
+directions by the part of it they already hold, which gets the source size
+right and keeps the pattern (§8).
+With equal weights it costs some 20 s for 50 000 rays, about twenty
+electrons per ray kept; with <strong>Photon Weights = unequal, S0 per ray</strong> every
+electron is a ray and it costs a twentieth of that, with rays of unequal
+S0. Take it where the energy spread matters, as a check on the others.</p>
+<p>What each one gets right, measured:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>pinhole pattern</th>
+<th>source size</th>
+<th>divergence</th>
+<th>waist</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pinhole difference (removed)</td>
+<td>exact</td>
+<td>exact</td>
+<td><strong>+1.3 %</strong></td>
+<td><strong>440 mm off</strong></td>
+</tr>
+<tr>
+<td>angular spectrum</td>
+<td>smeared by the source size</td>
+<td>exact</td>
+<td>-0.3 %</td>
+<td>5 mm</td>
+</tr>
+<tr>
+<td>Wigner (alpha)</td>
+<td>exact</td>
+<td>exact</td>
+<td><strong>-2.0 %</strong></td>
+<td>14 mm</td>
+</tr>
+<tr>
+<td>ray per electron incl. diffraction</td>
+<td>exact in its rms, energy spread included</td>
+<td>exact</td>
+<td>see §8</td>
+<td>0</td>
+</tr>
+<tr>
+<td>ray per electron</td>
+<td>exact, energy spread included</td>
+<td><strong>electron beam only</strong></td>
+<td>see §8</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>The divergences are against the angular spectrum of the same field, which
+agrees with an independent transform to 0.01 %. The waists are measured by
+RAY-UI on the traced rays (<code>focus_horizontal_z0</code>).</p>
+<p>Through a soft X-ray beamline at 400 eV Wigner (alpha) gives a <strong>6 %
+narrower horizontal focus</strong> than the pinhole difference, with the flux
+unchanged to 0.8 %.</p>
+<p>Two things to know before using it:</p>
+<ul>
+<li>Wigner (alpha) <strong>refuses to trace</strong> if urad could not produce the
+  coupling, rather than falling back to another draw. A trace that produced
+  nothing is a question; one that quietly used a different draw is a wrong
+  answer. The refusal holds for that trace alone: its rays are all lost, the
+  reason is printed, and Number of Rays is left as it is. (It used to zero
+  Number of Rays from the next trace on, for good, whatever Ray Generation
+  was then set to.) Ray per electron and an empty angular spectrum
+  refuse the same way.</li>
+<li>The coupling and the distribution cost memory and time: the coupling 16
+  bytes per source point and pinhole point and some 1.4 us per cell for its
+  Sinkhorn solves, the distribution (source points)² × angles² terms, 1e10
+  in 16 s on four cores. On the UE65's 151 x 151 pinhole grid against its
+  45 x 31 source grid that was 737 MB and a minute. So the coupling is taken
+  on every k-th pinhole point, the smallest k for which the memory fits an
+  eighth of the machine's memory (<code>RAYUI_URAD_COUPLING_MB</code>), the coupling
+  stays under 1.6e7 cells (<code>RAYUI_URAD_COUPLING_MAXCELLS</code>, some 20 s) and
+  the distribution under 3e10 terms (<code>RAYUI_URAD_WIGNER_MAXTERMS</code>, some
+  50 s). The distribution's angles go with k -- their step was matched to
+  the fine pinhole step -- so it gets k² cheaper as the coupling gets k²
+  smaller. The fine pinhole point is drawn inside the coarse point's block
+  from the fine intensity: the pattern stays exact at full resolution, only
+  the correlation is resolved coarser. On the UE65 k = 2 with 51 angles,
+  187 MB, gives the source size, divergence and pinhole width of the full
+  computation to 0.6 %, within the noise of 50 000 rays; k = 3 likewise. The
+  source grid is cropped to the box that keeps 99.99 % of its intensity
+  first; the trace prints what was done. It refused past a fixed 250 MB and
+  a fixed 2000 source points before, which the automatically chosen grids
+  passed as a rule.</li>
+<li>The coupling is computed at the <strong>middle</strong> photon energy and used for all
+  slices, so in a band run its marginals are that slice's rather than the
+  weighted sum. Over 0.07 % that is negligible; over a wide band it is not.</li>
+</ul>
+<p>To look at any of it, set <code>RAYUI_URAD_GRID_DUMP</code> to a path prefix for the
+source, pinhole and angular grids, and <code>RAYUI_URAD_WIGNER_DUMP</code> for the
+distribution and the coupling's diagnostics. The grids are tab-separated
+text with a header line; the distribution is a binary file with a text file
+beside it that gives its shape, axes and photon energy.</p>
+<hr />
+<h2 id="1-why-the-obvious-way-cannot-be-right">1. Why the obvious way cannot be right<a class="headerlink" href="#1-why-the-obvious-way-cannot-be-right" title="Permanent link">&para;</a></h2>
+<p>A ray needs a position and a direction. The source has a field at the pinhole
+and, by back-propagation, a field at the source plane. The obvious thing is to
+draw a position from one and a direction from the other.</p>
+<p>It cannot work, and the reason is not subtle. Draw the origin <code>x_s</code> from the
+source distribution and the pinhole point <code>x_p</code> from the pinhole
+distribution, independently, and form the direction as <code>(x_p - x_s)/L</code>. Then
+the <em>third</em> distribution — whichever of the three you did not draw from — is
+forced to be the convolution of the two you did. A coherent field does not
+satisfy that relation: position and angle are correlated, and in the far field
+almost perfectly, <code>theta ≈ x/L</code>.</p>
+<p>So <strong>at most two of the three can be right</strong>, and which two is a choice:</p>
+<ul>
+<li>Draw origin and pinhole point: the pinhole pattern and the source size are
+  right by construction, and the direction pays. It pays twice over. The
+  difference of two independent draws leaves
+  <code>&lt;x_s theta&gt; = -sigma_s^2/L</code>, so the ensemble's waist is not at <code>z = 0</code> but
+  at <code>L sigma_s^2/(sigma_s^2 + sigma_p^2)</code> — 440 mm for the UE65 at a 10 m
+  pinhole, measured on the rays. And the source size enters the divergence a
+  second time instead of cancelling.</li>
+<li>Draw origin and direction: the source size and the divergence are right,
+  and the pinhole pattern is smeared by the source size — 61 um at 100 eV
+  against a 31 um grid step, which is what takes the outer rings out of it.</li>
+<li>Draw the <strong>pair</strong>: nothing pays. That needs the joint distribution.</li>
+</ul>
+<p>The joint distribution of position and angle is the Wigner distribution.
+Nothing less will do, and that is not a matter of taste: any scheme built on
+two independent draws is subject to the constraint above.</p>
+<h2 id="2-the-wigner-distribution-ported-from-brill">2. The Wigner distribution, ported from BRILL<a class="headerlink" href="#2-the-wigner-distribution-ported-from-brill" title="Permanent link">&para;</a></h2>
+<p><code>urad_wigner_num</code> in <code>src/uradphase/urad_wigner.f</code> is BRILL's
+<code>undulator_wigner_num</code> (Michael Scheer, <code>for/urad_phase_main.f</code> of
+2026-09-14), ported. BRILL also has <code>urad_phase_genpho</code>, which draws weighted
+photons straight from the distribution; that route is <strong>not</strong> taken here, for
+the reason in §5.</p>
+<p>The caller puts the field in slot 1 of <code>esour</code> and its conjugate in slot 2, so
+that any of the four bilinear combinations of the two transverse components
+can be asked for; S0 is the two like pairs summed. It is driven from
+<code>aradprop_u</code> on the back-propagated source plane — not the pinhole plane —
+because the cost goes as <code>nx^2 ny^2 ntx nty</code> and the transform propagator
+crops the source grid to some 17 x 17 where the pinhole grid is 119 x 117:
+1.7e9 inner terms against 2e12.</p>
+<p>BRILL's own documentation calls these calculations experimental, so nothing
+was taken on trust. Two things came out of checking.</p>
+<p><strong>The odd separations carried the wrong phase.</strong> For an odd separation <code>n</code> the
+field product is taken at the points of separation <code>2*(n/2)</code> — integer
+division — while the phase factor still carries <code>n*dx</code>. Half of all terms
+were summed with the wrong phase, and the distribution came out 17 % too
+narrow at 700 eV. Skipping the odd separations makes the two consistent and
+costs three quarters of the time. It costs no reach: the integrand needs the
+field at <code>x ± s/2</code>, so with the field on a grid of step <code>dx</code> the separation
+step is <code>2*dx</code> at every output point, half grid or not, and the angular range
+is <code>±lambda/(4*dx)</code> either way.</p>
+<p><strong>And the skip did not take effect at first.</strong> The OpenMP directive says
+<code>DEFAULT(PRIVATE)</code>, so the new flag — in the argument list but not in
+<code>FIRSTPRIVATE</code> — arrived in every thread as an uninitialised private copy,
+zero under <code>-finit-local-zero</code>, which is the old loop. The run gave numbers
+identical to the bit and the same wall time while the file header said
+otherwise. The loop now counts the terms it sums and the check prints them
+against the full loop: the skip has to show as a factor four, and it reads
+0.2505.</p>
+<p>What holds, and is the check that says the transform is right: integrated over
+the full angular range the distribution reproduces the source intensity
+<strong>exactly</strong> — 61.34 against 61.34 um — and inside the angular window it
+reaches it reproduces the angular spectrum of the same field to <strong>-0.0 %</strong>.</p>
+<p><code>RAYUI_URAD_WIGNER_UP</code> interpolates the field onto a finer grid first, which
+adds no information but lets the <code>2*dx</code> separations reach the field's own
+Nyquist. It doubles the recovered ring minima from 7 to 12 and costs the
+fourth power of the factor — 16 times for 2. It is wanted only for drawing
+straight from the distribution; see §4.</p>
+<h2 id="3-why-not-husimi">3. Why not Husimi<a class="headerlink" href="#3-why-not-husimi" title="Permanent link">&para;</a></h2>
+<p>Smoothing the distribution with a Gaussian of minimum phase-space area makes
+it provably non-negative, after which everything existing works unchanged.
+It is a dead end, and the number says so: the minimum blur it puts on the
+pinhole pattern is</p>
+<div class="highlight"><pre><span></span><code>sqrt(lambda L / 2 pi)  =  140 um at 100 eV,  53 um at 700
+</code></pre></div>
+<p>against the 61 and 23 um of smearing the independent draw already has.
+Husimi is a factor 2.3 worse than what it would be fixing, at both energies,
+because both quantities scale as sqrt(lambda).</p>
+<p>A <em>sheared</em> kernel, oriented along <code>dx = -L dtheta</code>, leaves one chosen plane
+sharp and blurs the source instead — but then the source distribution is
+plane-specific, and the point of a source is that it is not.</p>
+<h2 id="4-the-coupling">4. The coupling<a class="headerlink" href="#4-the-coupling" title="Permanent link">&para;</a></h2>
+<p><code>urad_wigner_couple</code> is the route that is taken. W transported to
+<code>(x_s, x_p) = (x, x + theta L)</code> gives the coupling the field implies. It is
+still signed, but far less so than W — <strong>8 % against 36 %</strong>, the oscillation
+largely cancelling once an angle becomes an arrival point — and its positive
+part is the reference for a Sinkhorn projection onto the two measured
+marginals, which it meets to 5e-16. One degree of freedom is left, a tilt
+<code>exp(-mu x_s theta)</code> per plane; solving for the <code>mu</code> that makes
+<code>&lt;x_s theta&gt;</code> vanish puts the waist at zero.</p>
+<p>Both marginals are the <strong>unfolded</strong>, single-electron intensities, as W is.
+The electron beam goes on top, as a displacement of the drawn pair in position
+and angle together: the same transverse offset moves both points and the
+angular offset moves the pinhole point by itself times the distance, so the
+difference carries the angle and the origin carries the position. That is
+BRILL's <code>genpho</code> treatment and the only one that does not count the beam
+twice. The sigmas come from <code>emittanceX/Y</code> and the beta functions, which is
+where urad's own fold takes them from.</p>
+<p>Fifty Sinkhorn iterations, which is measured and not guessed: the marginal
+error is 5e-3 after three, 8e-5 after ten and 5e-10 after thirty, with the
+moments settled from thirty on.</p>
+<p>The coupling wants <code>iup = 1</code> and is refused otherwise — its rows have to be
+the source grid the caller indexes — and that is the more accurate setting for
+it anyway, where the source marginal is met exactly rather than on a resampled
+copy. Measured both ways, the divergence is the same to 0.1 % and the source
+size is exact at <code>iup = 1</code>, for a fifteenth of the time.</p>
+<h2 id="5-why-not-signed-weights">5. Why not signed weights<a class="headerlink" href="#5-why-not-signed-weights" title="Permanent link">&para;</a></h2>
+<p>Drawing straight from W and carrying its sign as the ray's weight is the only
+<em>exact</em> route, and BRILL's <code>genpho</code> does exactly that. It was left out here,
+deliberately.</p>
+<p>The negative share is 36 %, so <code>sum|W| / net</code> is 2.14 and the same noise wants
+<strong>4.6 times the rays</strong>. That is affordable. What is not is the analysis chain:
+the rejection sampler cannot represent a negative weight at all
+(<code>while (WI - rn &lt; 0.0)</code> never accepts one), and <code>d_maxIntensity</code>, the FWHM
+and the enclosed-energy widths all assume a non-negative profile. Linear
+operations are fine — reflectivities, apertures as masks, flux sums — and
+everything nonlinear is not.</p>
+<p>The coupling trades exactness for keeping all of that working: its 2 %
+narrow divergence <em>is</em> the discarded negative part, and that is the whole of
+its approximation.</p>
+<h2 id="6-what-it-does-to-the-beamline">6. What it does to the beamline<a class="headerlink" href="#6-what-it-does-to-the-beamline" title="Permanent link">&para;</a></h2>
+<p>Measured at 400 eV with the real lattice beam, ten million rays, which puts
+7200 at the focus and so 0.8 % on a width:</p>
+<table>
+<thead>
+<tr>
+<th>horizontal width</th>
+<th>exit slit</th>
+<th>intermediate focus</th>
+<th>focus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pinhole difference (removed)</td>
+<td>7796 nm</td>
+<td>518.1 nm</td>
+<td>49.97 nm</td>
+</tr>
+<tr>
+<td>angular spectrum</td>
+<td>7785 nm</td>
+<td>514.9 nm</td>
+<td>49.30 nm</td>
+</tr>
+<tr>
+<td>Wigner (alpha)</td>
+<td><strong>7309 nm</strong></td>
+<td><strong>481.3 nm</strong></td>
+<td><strong>46.68 nm</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Six to seven per cent narrower horizontally, at 15, 14 and 8 sigma. Vertically
+1.2 %, which is 1.5 sigma and says nothing. The flux agrees to 0.8 %.</p>
+<p>The mechanism is not the one that was predicted. The focus <em>position</em> is
+barely moved — a 440 mm waist error through the square of the 150-fold
+demagnification is some 14 um, a fraction of the depth of focus. The error is
+in the <strong>size of the intermediate image</strong>: an object plane 440 mm off the
+waist is defocused at the exit-slit image, the beam there is larger, and that
+<em>relative</em> error is carried to the focus undiminished. The lever is the
+magnification to the slit, not to the focus.</p>
+<p>And it splits in two. At the source all three draws agree in size to 1.5 % and
+in divergence to 1.1 %, so neither marginal explains 6.6 % downstream. Of it,
+7796 to 7785 nm — effectively nothing — then 7785 to 7309 for the coupling;
+measured against the default at a second ray count the split comes out about
+half waist and half pattern. The spectrum and the coupling share a waist
+position, a width at the waist to 0.4 % and a divergence to 0.6 % and still
+differ, so what is left is the <strong>shape</strong> of the phase-space distribution,
+which the coupling reproduces and the spectrum smears.</p>
+<h2 id="7-what-is-open">7. What is open<a class="headerlink" href="#7-what-is-open" title="Permanent link">&para;</a></h2>
+<p><strong>The 2 % divergence deficit.</strong> The coupling is 2.0 % narrower than the
+angular spectrum of the same field, and that is the negative part thrown away
+in the Sinkhorn projection. The default draw is 1.3 % wide, so the truth lies
+between them and nearer the coupling — but not at it. Closing this is the next
+piece of work and has not been attempted.</p>
+<p><strong>The <code>focus_*</code> scalars do not close as a Gaussian.</strong> A waist 440 mm away with
+40 urad of divergence cannot grow a width from 36.6 to 71.9 um, which would
+want 141 urad. They are used above for ordering and magnitude, where they
+agree with an independent measurement, and not for a quantitative phase-space
+reconstruction — that would want the rays rather than scalars.</p>
+<p><strong>The band case.</strong> One coupling at the middle photon energy stands for all
+slices. Fine over 0.07 %, unexamined over anything wider.</p>
+<h2 id="8-ray-per-electron-and-whether-the-back-propagation-is-still-needed">8. Ray per electron, and whether the back-propagation is still needed<a class="headerlink" href="#8-ray-per-electron-and-whether-the-back-propagation-is-still-needed" title="Permanent link">&para;</a></h2>
+<p>BRILL's urad has a mode the Undulator Source had carried as dead code since
+its first version: <code>modepin = 1</code>, one observation point per electron. Every
+electron is drawn from the beam, its field computed at one point, and the
+result recorded per electron in <code>fbunch_u</code> — the point, the Stokes
+parameters, the six field components, the Poynting vector, and now where the
+electron crosses the undulator centre. That is the Monte-Carlo counterpart of
+everything above: no fold, because the electrons are the beam, and no
+propagation, because each electron has its ray.</p>
+<p><strong>How it is drawn.</strong> The observation points are not left to urad's uniform
+draw: uniformly over the pinhole, 95 % of the electrons land where the beam is
+dark. They are drawn from the pinhole intensity of the grid run, electron beam
+and energy spread folded in — the density the electrons give on average —
+with a tenth kept uniform, and handed to urad (<code>irandom = 4</code>,
+<code>uradSetObservationPoints</code>). Each electron then weighs <code>S0/p</code>, and is kept
+with probability <code>w/max(w)</code>, so that the rays have equal weights. The flux is
+the mean weight. urad runs in batches until enough electrons are kept.</p>
+<p>Even so only one electron in twenty is kept, and that is the electrons, not
+the sampling: a single electron's pattern is sharp where the average is
+smooth, most of all the ring an electron off in energy radiates onto, and its
+weight there reaches twenty to twenty-five times the mean. Before the grid
+had the energy spread folded in, the electrons two or three sigma off in
+energy carried all the largest weights.</p>
+<p><strong>Unequal weights.</strong> With <strong>Photon Weights = unequal, S0 per ray</strong> no electron
+is rejected: urad computes as many electrons as rays are asked for, and each
+ray carries the electron's weight as S0, scaled so that the rays together
+carry the flux exactly. The analyses weight by S0 — the histograms, the
+envelope and focus, the footprint power, and since this change the mean
+photon energy per bin and the Full Monte Carlo efficiencies too — so both
+settings give the same distributions. What the weights cost is noise: rays of
+unequal S0 are worth <code>(Σw)²/Σw²</code> rays of equal weight, which the trace
+prints. On the UE65 at 300 eV, 20 000 rays:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>equal, by rejection</th>
+<th>unequal, S0 per ray</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>electrons computed</td>
+<td>490 864 in 10.6 s</td>
+<td>20 000 in 0.44 s</td>
+</tr>
+<tr>
+<td>worth equal-weight rays</td>
+<td>20 000</td>
+<td>14 769 (74 %)</td>
+</tr>
+<tr>
+<td>rms width in the pinhole against the folded grid</td>
+<td>+0.14 / +0.23 %</td>
+<td>+1.2 / −0.4 %</td>
+</tr>
+<tr>
+<td>rms source size, um (beam 17.90 / 1.89)</td>
+<td>17.82 / 1.91</td>
+<td>18.02 / 1.89</td>
+</tr>
+</tbody>
+</table>
+<p>Some eighteen times the effective rays for the same time. The differences of
+the weighted run are within the noise of 15 000 effective rays.</p>
+<p><strong>What it gets right.</strong> The UE65 at 300 eV, 50 000 rays, 1.6 mm pinhole,
+energy spread folded:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>angular spectrum</th>
+<th>Wigner (alpha)</th>
+<th>ray per electron</th>
+<th>reference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>flux, ph/s/0.1%BW</td>
+<td>1.2708e15</td>
+<td>1.2708e15</td>
+<td>1.2702e15</td>
+<td>grid 1.2708e15</td>
+</tr>
+<tr>
+<td>rms width in the pinhole, um</td>
+<td>204.4 / 200.1</td>
+<td>192.8 / 187.4</td>
+<td><strong>196.5 / 193.0</strong></td>
+<td>folded grid 196.5 / 192.8</td>
+</tr>
+<tr>
+<td>rms source size, um</td>
+<td>40.6 / 35.0</td>
+<td>41.0 / 35.7</td>
+<td><strong>17.9 / 1.90</strong></td>
+<td>electron beam 17.9 / 1.89</td>
+</tr>
+<tr>
+<td>rms divergence, urad</td>
+<td>20.0 / 19.7</td>
+<td>18.9 / 18.4</td>
+<td>19.6 / 19.3</td>
+<td></td>
+</tr>
+<tr>
+<td>waist, mm</td>
+<td>2 / 4</td>
+<td>37 / 6</td>
+<td>-3 / 0.7</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>The pattern is the folded grid's to 0.1 %, with the energy spread, which
+Wigner (alpha) does not have: its coupling is the middle slice's, unfolded, and
+that is its 2 to 3 % narrow pattern here. The divergences are not compared
+against each other: an undulator line has sinc² wings whose second moment the
+pinhole edge decides, and the angular spectrum is not cut by that edge.</p>
+<p><strong>What it cannot get right is the source size</strong>, and that answers the
+question. A ray from the electron to the point it radiated to is the
+geometric limit of the electron's field, and that limit has no size of its
+own: the source comes out as the electron beam, 17.9 by 1.9 um, against 41 by
+36 um from the back-propagated field. Vertically the photon emittance is then
+1.9 um × 19 urad = 37 pm, a ninth of λ/4π = 329 pm — the rays violate the
+uncertainty relation they are meant to represent. It is not a matter of the
+direction either: the Poynting vector of the electron's own field, traced back
+from the point, lands 0.16 and 0.06 um from the electron, two orders of
+magnitude short of the single-electron source.</p>
+<p>So the back-propagation is not needed for the pattern, the energy spread or
+the flux — ray per electron gives all three without it — but it is the
+only place the single-electron source size comes from, and no per-electron
+ray picture recovers it. Wigner (alpha) has it because it draws the origin
+from the back-propagated intensity; ray per electron would need the same,
+drawing a displacement from the single-electron source on top of the
+electron's own position, which is Wigner (alpha) again with the electrons
+in place of the fold.</p>
+<p><strong>Incl. diffraction.</strong> <code>ray per electron incl. diffraction</code> does the first
+half of that: each ray of an electron is shifted, origin and pinhole point
+together, by a displacement drawn from the back-propagated, unfolded
+single-electron intensity, independently of the direction, so it is not yet
+Wigner (alpha) with electrons. The shift alone widened the pinhole pattern
+by 1 to 2 %: at a waist σ_P² = Σ² + L²Σ′², so the electron's pinhole point
+already holds the single-electron source, and the shift counted it twice.
+The directions are narrowed about their mean by s = √(1 − var δ / var u)
+per plane, u the pinhole point minus the electron, some 0.98 at 10 m; that
+gives the pattern back in its rms and leaves the waist at z = 0.</p>
+<p>On the UE65 at 300 eV the source comes out 40.4 x 35.7 µm, against
+40.4 x 34.7 µm from the angular spectrum and 40.8 x 35.1 µm from Wigner
+(alpha); a single electron gives 35.1 x 35.0 µm against the angular
+spectrum's 34.5 x 34.9 µm. The pinhole pattern is the folded grid's to
+0.6 %. The correlation inside the single-electron source is not carried.
+Plain <code>ray per electron</code> keeps the electron beam's size alone, as above.</p>
+<p><strong>Two defects it found on the way</strong>, both in Wigner (alpha):</p>
+<ul>
+<li>On the first trace after a load the coupling was checked against
+  <code>m_sourceGrid</code> before it was built, found the placeholder's single entry,
+  and refused. It is checked after the source grid now.</li>
+<li>With the energy spread folded in no coupling was ever computed:
+  <code>urad_wigner_dump</code> cleared its flag for the slices before the middle one and
+  so for the middle one too. The flag is per slice now.</li>
+</ul>
+<p>And three in urad's <code>modepin = 1</code>, which nothing had run: the slot counter
+<code>lbunch</code> was shared by the threads without a lock; the emittance globals are
+converted in place, so a second run saw 1e-9 of the beam's (every run now
+starts from <code>initUradPhase()</code>); and with neither emittance nor energy spread
+urad collapsed the run to one electron, and so to one observation point.</p>
+<h2 id="where-the-code-is">Where the code is<a class="headerlink" href="#where-the-code-is" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>src/uradphase/urad_wigner.f</code> — the distribution, the band-limited
+  interpolation, the coupling, Sinkhorn, the covariances.</li>
+<li><code>src/uradphase/urad_modules.f</code> — <code>fda_u</code>/<code>fdc_u</code> and their accessors,
+  <code>iangdir</code>/<code>icouple</code>.</li>
+<li><code>src/uradphase/urad_phase_prop_fft.f</code> — <code>urad_angular_spectrum</code>.</li>
+<li><code>src/uradphase/urad_phase_main.f</code> — the call sites, before the
+  back-propagation overwrites <code>arad_u</code>.</li>
+<li><code>src/Ray-UI/LightSources/undulatorsource.cpp</code> — the parameter,
+  <code>randomFromAngularSpectrum</code>, <code>randomFromCoupling</code>, the CDF, the electron
+  displacement, <code>runElectronByElectron</code>, <code>randomFromElectrons</code>.</li>
+<li><code>src/uradphase/urad_phase_main.f</code> — <code>modepin = 1</code>: the electron at the
+  undulator centre in <code>fbunch_u(5:9)</code>, the slot per electron, <code>irandom = 4</code>.</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<p>Scheer, BRILL, <code>for/urad_phase_main.f</code> and <code>for/urad_util.f</code> of 2026-09-14 —
+<code>undulator_wigner_num</code>, <code>urad_phase_genpho</code>, <code>util_read_wigner</code>,
+<code>util_linear_inter_4d_real</code>.</p>
+<p>Sinkhorn, R. (1964), <em>A relationship between arbitrary positive matrices and
+doubly stochastic matrices</em>, Ann. Math. Statist. 35, 876.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.top", "content.code.copy"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
