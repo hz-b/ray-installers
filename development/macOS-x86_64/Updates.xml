@@ -1,0 +1,38 @@
+<Updates>
+ <ApplicationName>{AnyApplication}</ApplicationName>
+ <ApplicationVersion>1.0.0</ApplicationVersion>
+ <Checksum>true</Checksum>
+ <PackageUpdate>
+  <Name>de.hzb.rayui.core</Name>
+  <DisplayName>RAY-UI Core Component</DisplayName>
+  <Description>Install this to use RAY-UI.</Description>
+  <Version>161.845</Version>
+  <ReleaseDate>2026-11-24</ReleaseDate>
+  <Default>true</Default>
+  <Script>installscript.qs</Script>
+  <UpdateFile CompressedSize="33389915" OS="Any" UncompressedSize="121193909"/>
+  <DownloadableArchives>data.7z,Licenses.7z,Ray-UI.app.7z</DownloadableArchives>
+  <Licenses>
+   <License file="RAY-UI-License.txt" name="RAY-UI License Agreement"/>
+   <License file="lgpl-2.1.txt" name="Licence for quadmath library"/>
+   <License file="lgpl-3.0.txt" name="Licence for Qt libraries"/>
+  </Licenses>
+  <SHA1>6bcbc51667e50b0381db9a41b0796666a2fac927</SHA1>
+ </PackageUpdate>
+ <PackageUpdate>
+  <Name>de.hzb.rayui.maintenancetool</Name>
+  <DisplayName>RAY-UI Maintenance Tool</DisplayName>
+  <Description>Signed maintenance tool for macOS.</Description>
+  <Version>4.11.0-1</Version>
+  <ReleaseDate>2026-11-24</ReleaseDate>
+  <Virtual>true</Virtual>
+  <ForcedInstallation>true</ForcedInstallation>
+  <Essential>true</Essential>
+  <Script>installscript.qs</Script>
+  <UpdateFile CompressedSize="40491062" OS="Any" UncompressedSize="152961522"/>
+  <DownloadableArchives>Ray-UI-Maintenance.app.7z,content.7z</DownloadableArchives>
+  <SHA1>4aaec3e0b7c838f771318d034ca46a0d1e8abcd9</SHA1>
+ </PackageUpdate>
+ <SHA1>bb52fabeb4050727b2e425f53275bcbae11f0707</SHA1>
+ <MetadataName>2026-11-24-2357_meta.7z</MetadataName>
+</Updates>
